@@ -1,0 +1,75 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "ignorePatterns": ["src", ".eslintrc"],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "project": ["./tsconfig.json", "./tsconfig.node.json"],
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react-refresh",
+    "@typescript-eslint",
+    "react",
+    "jsx-a11y",
+    "react-hooks",
+    "prettier"
+  ],
+  "root": true,
+  "rules": {
+    "@typescript-eslint/space-before-function-paren": "off",
+    "jsx-quotes": ["error", "prefer-double"],
+    "no-unused-vars": [
+      "error",
+      {
+        "args": "after-used",
+        "ignoreRestSiblings": false,
+        "vars": "all"
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "quote-props": "off",
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "callbacksLast": false,
+        "ignoreCase": true,
+        "noSortAlphabetically": false,
+        "shorthandFirst": false,
+        "shorthandLast": false
+      }
+    ],
+    "sort-keys": ["warn", "asc", { "caseSensitive": true, "minKeys": 2, "natural": true }],
+    "space-before-function-paren": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

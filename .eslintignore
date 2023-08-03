@@ -1,0 +1,7 @@
+dist
+dist-ssr
+node_modules
+postcss.config.js
+src/vite-env.d.ts
+tailwind.config.js
+vite.config.ts
