@@ -9,7 +9,7 @@ import WordleGameContainer from '@/containers/WordleGame'
  */
 const Game = () => {
   return (
-    <main className="flex h-screen flex-col items-center justify-center bg-[#f9f9f9]">
+    <main className="flex h-screen flex-col items-center justify-center bg-[#f9f9f9] dark:bg-[#262B3C]">
       <NavbarContainer />
       <WordleGameContainer />
       <KeyboardContainer />
