@@ -1,15 +1,31 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 interface StatsDialogProps {
+  gameStatus: string
   isOpen: boolean
   onClose: () => void
+  word: string
 }
 
 /**
  * The StatsDialog' container
  */
-const StatsDialog = ({ isOpen, onClose }: StatsDialogProps) => {
+const StatsDialog = ({ gameStatus, isOpen, onClose, word }: StatsDialogProps) => {
+  const [victories, setVictories] = useState<number>(0)
+  const [games, setGames] = useState<number>(0)
+
+  useEffect(() => {
+    if (gameStatus === 'won') {
+      setVictories(victories + 1)
+      return setGames(games + 1)
+    }
+
+    if (gameStatus === 'lost') {
+      return setGames(games + 1)
+    }
+  }, [gameStatus])
+
   return (
     <Transition as={Fragment} show={isOpen}>
       <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" onClose={onClose}>
@@ -46,21 +62,27 @@ const StatsDialog = ({ isOpen, onClose }: StatsDialogProps) => {
               <div className="flex flex-col justify-center p-8">
                 <div className="mb-4 flex justify-between">
                   <div className="flex flex-col items-center justify-center">
-                    <p className="mb-3 text-3xl font-bold text-[#202537] dark:text-[#DADCE0]">8</p>
+                    <p className="mb-3 text-3xl font-bold text-[#202537] dark:text-[#DADCE0]">
+                      {games}
+                    </p>
 
                     <p className="mb-3 text-lg text-[#202537] dark:text-[#DADCE0]">Jugadas</p>
                   </div>
 
                   <div className="flex flex-col items-center justify-center">
-                    <p className="mb-3 text-3xl font-bold text-[#202537] dark:text-[#DADCE0]">2</p>
+                    <p className="mb-3 text-3xl font-bold text-[#202537] dark:text-[#DADCE0]">
+                      {victories}
+                    </p>
 
                     <p className="mb-3 text-lg text-[#202537] dark:text-[#DADCE0]">Victorias</p>
                   </div>
                 </div>
 
-                <p className="mb-3 text-lg text-[#202537] dark:text-[#DADCE0]">
-                  La palabra era: <span className="font-bold">PERRO</span>
-                </p>
+                {gameStatus === 'lost' && (
+                  <p className="mb-3 text-lg text-[#202537] dark:text-[#DADCE0]">
+                    La palabra era: <span className="font-bold">{word}</span>
+                  </p>
+                )}
 
                 <p className="mb-3 text-lg uppercase text-[#202537] dark:text-[#DADCE0]">
                   Siguiente palabra

@@ -46,12 +46,14 @@ const Game = () => {
   const handleEnter = () => {
     if (currentWord === word) {
       setCompleteWords([...completeWords, currentWord])
+      setIsStatsModalOpen(true)
 
       return setGameStatus('won')
     }
 
     if (turn === MAX_CHALLENGES) {
       setCompleteWords([...completeWords, currentWord])
+      setIsStatsModalOpen(true)
 
       return setGameStatus('lost')
     }
@@ -137,8 +139,10 @@ const Game = () => {
           onClose={() => setIsHowToPlayDialogOpen(false)}
         />
         <StatsDialogContainer
+          gameStatus={gameStatus}
           isOpen={isStatsModalOpen}
           onClose={() => setIsStatsModalOpen(false)}
+          word={word}
         />
         <AlertContainer />
       </div>

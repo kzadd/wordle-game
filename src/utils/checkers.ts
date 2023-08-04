@@ -37,7 +37,5 @@ export const getKeyStatuses = (
     })
   })
 
-  console.log()
-
   return keyObj
 }
