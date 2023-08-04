@@ -2,7 +2,7 @@
  * The StatisticsDialog' container
  */
 const StatisticsDialog = () => {
-  return <div>StatisticsDialog</div>
+  return <section>StatisticsDialog</section>
 }
 
 export default StatisticsDialog

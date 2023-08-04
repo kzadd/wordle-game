@@ -2,7 +2,7 @@
  * The HowToPlayDialog' container
  */
 const HowToPlayDialog = () => {
-  return <div>HowToPlayDialog</div>
+  return <section>HowToPlayDialog</section>
 }
 
 export default HowToPlayDialog

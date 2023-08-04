@@ -13,6 +13,7 @@
     "^@/configs/(.*)$",
     "^@/router/(.*)$",
     "^@/utils/(.*)$",
+    "^@/types/(.*)$",
     "^@/pages/(.*)$",
     "^@/containers/(.*)$",
     "^@/components/(.*)$",
@@ -23,5 +24,6 @@
   ],
   "importOrderSeparation": false,
   "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": true,
   "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"]
 }
