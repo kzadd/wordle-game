@@ -6,20 +6,24 @@ import {
   MAX_CHALLENGES,
   REVEAL_TIME_MS
 } from '@/configs/constants'
+import { GameStatus } from '@/types/wordle'
 import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage } from '@/utils/localStorage'
 import { getWordOfDay, isValidWord } from '@/utils/words'
-import { GameStatus } from '@/types/wordle'
+import { useAlert } from '@/context/AlertContext'
+import { useWindow } from '@/hooks/useWindow'
+import AlertContainer from '@/containers/Alert'
 import HowToPlayDialogContainer from '@/containers/HowToPlayDialog'
 import KeyboardContainer from '@/containers/Keyboard'
 import NavbarContainer from '@/containers/Navbar'
 import StatsDialogContainer from '@/containers/StatsDialog'
 import WordleGameContainer from '@/containers/WordleGame'
-import { useWindow } from '@/hooks/useWindow'
 
 /**
  * The Game' page
  */
 const Game = () => {
+  const { showError: showErrorAlert } = useAlert()
+
   const [completeWords, setCompleteWords] = useState<string[]>([])
   const [currentWord, setCurrentWord] = useState<string>('')
   const [gameStatus, setGameStatus] = useState<GameStatus>('playing')
@@ -53,12 +57,11 @@ const Game = () => {
     }
 
     if (currentWord.length === LETTERS_LENGTH && !isValidWord(currentWord)) {
-      return alert('is invalid word')
+      return showErrorAlert('La palabra no existe')
     }
 
     setIsRevealing(true)
-    // turn this back off after all
-    // chars have been revealed
+
     setTimeout(() => {
       setIsRevealing(false)
     }, REVEAL_TIME_MS * LETTERS_LENGTH)
@@ -127,6 +130,7 @@ const Game = () => {
           isOpen={isStatsModalOpen}
           onClose={() => setIsStatsModalOpen(false)}
         />
+        <AlertContainer />
       </div>
     </main>
   )
