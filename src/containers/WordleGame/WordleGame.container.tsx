@@ -24,21 +24,23 @@ const WordleGame = ({
   word
 }: WordleGameProps) => {
   return (
-    <section className="mb-14">
-      {completeWords.map((userWord, index) => (
-        <CompletedRow
-          isRevealing={isRevealing && completeWords.length - 1 === index}
-          key={index}
-          solution={word}
-          word={userWord}
-        />
-      ))}
+    <section className="py-4">
+      <div>
+        {completeWords.map((userWord, index) => (
+          <CompletedRow
+            isRevealing={isRevealing && completeWords.length - 1 === index}
+            key={index}
+            solution={word}
+            word={userWord}
+          />
+        ))}
 
-      {gameStatus === 'playing' ? <CurrentRow word={currentWord} /> : null}
+        {gameStatus === 'playing' ? <CurrentRow word={currentWord} /> : null}
 
-      {Array.from(Array(MAX_CHALLENGES - turn)).map((_, index) => (
-        <EmptyRow key={index} />
-      ))}
+        {Array.from(Array(MAX_CHALLENGES - turn)).map((_, index) => (
+          <EmptyRow key={index} />
+        ))}
+      </div>
     </section>
   )
 }

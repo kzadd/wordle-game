@@ -19,3 +19,25 @@ export const checkLetter = ({
 
   return 'absent'
 }
+
+export const getKeyStatuses = (
+  completeWords: string[],
+  solution: string
+): { [key: string]: CharacterBoxStatus } => {
+  const keyObj: { [key: string]: CharacterBoxStatus } = {}
+  const splitSolution = solution.split('')
+
+  completeWords.forEach(word => {
+    word.split('').forEach((letter, i) => {
+      if (!splitSolution.includes(letter)) return (keyObj[letter] = 'absent')
+
+      if (letter === splitSolution[i]) return (keyObj[letter] = 'correct')
+
+      if (keyObj[letter] !== 'correct') return (keyObj[letter] = 'present')
+    })
+  })
+
+  console.log()
+
+  return keyObj
+}

@@ -43,6 +43,32 @@ const StatsDialog = ({ isOpen, onClose }: StatsDialogProps) => {
                 Estadísticas
               </Dialog.Title>
 
+              <div className="flex flex-col justify-center p-8">
+                <div className="mb-4 flex justify-between">
+                  <div className="flex flex-col items-center justify-center">
+                    <p className="mb-3 text-3xl font-bold text-[#202537] dark:text-[#DADCE0]">8</p>
+
+                    <p className="mb-3 text-lg text-[#202537] dark:text-[#DADCE0]">Jugadas</p>
+                  </div>
+
+                  <div className="flex flex-col items-center justify-center">
+                    <p className="mb-3 text-3xl font-bold text-[#202537] dark:text-[#DADCE0]">2</p>
+
+                    <p className="mb-3 text-lg text-[#202537] dark:text-[#DADCE0]">Victorias</p>
+                  </div>
+                </div>
+
+                <p className="mb-3 text-lg text-[#202537] dark:text-[#DADCE0]">
+                  La palabra era: <span className="font-bold">PERRO</span>
+                </p>
+
+                <p className="mb-3 text-lg uppercase text-[#202537] dark:text-[#DADCE0]">
+                  Siguiente palabra
+                </p>
+
+                <p className="mb-3 text-lg font-bold text-[#202537] dark:text-[#DADCE0]">04:10</p>
+              </div>
+
               <button
                 className="h-[50px] w-[250px] rounded bg-[#6AAA64] text-2xl font-bold text-white hover:bg-[#5a9454] focus:outline-none"
                 onClick={() => onClose()}

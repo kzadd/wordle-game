@@ -71,20 +71,24 @@ const Game = () => {
     setCurrentWord('')
   }
 
-  const handleKeyDown = (event: KeyboardEvent) => {
-    const letter = event.key.toUpperCase()
-
+  const handleKeyPressed = (key: string) => {
     if (gameStatus !== 'playing') return
 
-    if (event.key === 'Backspace' && currentWord.length > 0) return handleDelete()
+    if (key === 'BACKSPACE' && currentWord.length > 0) return handleDelete()
 
-    if (event.key === 'Enter' && currentWord.length === LETTERS_LENGTH && turn <= MAX_CHALLENGES) {
+    if (key === 'ENTER' && currentWord.length === LETTERS_LENGTH && turn <= MAX_CHALLENGES) {
       return handleEnter()
     }
 
     if (currentWord.length >= LETTERS_LENGTH) return
 
-    if (DICTIONARY_WORDS.includes(letter)) return handleChar(letter)
+    if (DICTIONARY_WORDS.includes(key)) return handleChar(key)
+  }
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    const key = event.key.toUpperCase()
+
+    handleKeyPressed(key)
   }
 
   useWindow('keydown', handleKeyDown)
@@ -107,8 +111,8 @@ const Game = () => {
   }, [completeWords, word])
 
   return (
-    <main className="h-screen">
-      <div className="flex h-full flex-col items-center bg-[#f9f9f9] dark:bg-[#262B3C]">
+    <main className="relative h-screen overflow-auto bg-[#f9f9f9] dark:bg-[#262B3C]">
+      <div className="flex h-full flex-col items-center ">
         <NavbarContainer
           setIsHowToPlayDialogOpen={setIsHowToPlayDialogOpen}
           setIsStatsModalOpen={setIsStatsModalOpen}
@@ -121,7 +125,13 @@ const Game = () => {
           turn={turn}
           word={word}
         />
-        <KeyboardContainer />
+        <KeyboardContainer
+          completeWords={completeWords}
+          isRevealing={isRevealing}
+          keys={DICTIONARY_WORDS}
+          onKeyPressed={handleKeyPressed}
+          solution={word}
+        />
         <HowToPlayDialogContainer
           isOpen={isHowToPlayDialogOpen}
           onClose={() => setIsHowToPlayDialogOpen(false)}

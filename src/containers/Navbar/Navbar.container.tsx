@@ -30,42 +30,46 @@ const Navbar = ({ setIsHowToPlayDialogOpen, setIsStatsModalOpen }: NavbarProps) 
   }
 
   return (
-    <section className="my-14 flex h-24 w-[640px] items-center justify-between rounded-2xl bg-[#F3F3F3] px-6 py-4 dark:bg-[#DADCE008] max-sm:w-[90%]">
-      <div className="flex w-[105px]">
-        <QuestionMarkCircleIcon
-          className="h-8 w-8 cursor-pointer text-[#818181] dark:text-[#DADCE0]"
-          onClick={() => setIsHowToPlayDialogOpen(true)}
-        />
-      </div>
+    <section className="py-10">
+      <div className="flex h-24 w-[640px] items-center justify-between rounded-2xl bg-[#F3F3F3] px-6 py-4 dark:bg-[#DADCE008] max-sm:w-[90%]">
+        <div className="flex w-[105px]">
+          <QuestionMarkCircleIcon
+            className="h-8 w-8 cursor-pointer text-[#818181] dark:text-[#DADCE0]"
+            onClick={() => setIsHowToPlayDialogOpen(true)}
+          />
+        </div>
 
-      <p className="flex text-5xl font-bold uppercase text-[#202537] dark:text-[#DADCE0]">Wordle</p>
+        <p className="flex text-5xl font-bold uppercase text-[#202537] dark:text-[#DADCE0]">
+          Wordle
+        </p>
 
-      <div className="flex w-[105px] gap-3">
-        <ChartBarSquareIcon
-          className="h-8 w-8 cursor-pointer text-[#818181] dark:text-[#DADCE0]"
-          onClick={() => setIsStatsModalOpen(true)}
-        />
+        <div className="flex w-[105px] gap-3">
+          <ChartBarSquareIcon
+            className="h-8 w-8 cursor-pointer text-[#818181] dark:text-[#DADCE0]"
+            onClick={() => setIsStatsModalOpen(true)}
+          />
 
-        <Switch
-          checked={!isDarkMode}
-          className={`${
-            !isDarkMode
-              ? "bg-[url('/src/assets/images/toggle-light.svg')]"
-              : "bg-[url('/src/assets/images/toggle-dark.svg')]"
-          } duratio relative inline-flex h-[32px] w-[60px] shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-cover bg-center bg-origin-border transition-colors ease-in-out focus:outline-none`}
-          onChange={handleToggleTheme}
-        >
-          <span className="sr-only">Use toggle</span>
-          <span
-            aria-hidden="true"
+          <Switch
+            checked={!isDarkMode}
             className={`${
               !isDarkMode
-                ? "translate-x-6 bg-[url('/src/assets/images/sun.svg')]"
-                : "translate-x-0 bg-[url('/src/assets/images/moon.svg')]"
-            }
+                ? "bg-[url('/src/assets/images/toggle-light.svg')]"
+                : "bg-[url('/src/assets/images/toggle-dark.svg')]"
+            } duratio relative inline-flex h-[32px] w-[60px] shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-cover bg-center bg-origin-border transition-colors ease-in-out focus:outline-none`}
+            onChange={handleToggleTheme}
+          >
+            <span className="sr-only">Use toggle</span>
+            <span
+              aria-hidden="true"
+              className={`${
+                !isDarkMode
+                  ? "translate-x-6 bg-[url('/src/assets/images/sun.svg')]"
+                  : "translate-x-0 bg-[url('/src/assets/images/moon.svg')]"
+              }
             pointer-events-none inline-block h-[32px] w-[32px] transform rounded-full bg-cover bg-center bg-origin-border ring-0 transition duration-200 ease-in-out`}
-          />
-        </Switch>
+            />
+          </Switch>
+        </div>
       </div>
     </section>
   )
