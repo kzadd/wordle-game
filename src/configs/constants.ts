@@ -30,4 +30,4 @@ export const DICTIONARY_WORDS = [
 
 export const LETTERS_LENGTH = 5
 
-export const ROW_LENGTH = 5
+export const MAX_CHALLENGES = 5

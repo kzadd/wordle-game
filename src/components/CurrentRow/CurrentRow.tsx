@@ -10,7 +10,7 @@ interface CurrentRowProps {
  */
 const CurrentRow = ({ guess }: CurrentRowProps) => {
   return (
-    <div className="mb-4 flex gap-4 uppercase">
+    <div className="mb-3 flex gap-3 uppercase">
       {guess.split('').map((letter, index) => (
         <CharacterBox key={index} letter={letter} status="edit" />
       ))}

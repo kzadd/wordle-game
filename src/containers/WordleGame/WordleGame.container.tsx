@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { DICTIONARY_WORDS, LETTERS_LENGTH, ROW_LENGTH } from '@/configs/constants'
+import { DICTIONARY_WORDS, LETTERS_LENGTH, MAX_CHALLENGES } from '@/configs/constants'
+import { isValidWord } from '@/utils/helpers'
 import { GameStatus } from '@/types/wordle'
 import CompletedRow from '@/components/CompletedRow'
 import CurrentRow from '@/components/CurrentRow'
@@ -35,10 +36,14 @@ const WordleGame = () => {
       return setGameStatus('won')
     }
 
-    if (turn === ROW_LENGTH) {
+    if (turn === MAX_CHALLENGES) {
       setCompleteWords([...completeWords, currentWord])
 
       return setGameStatus('lost')
+    }
+
+    if (currentWord.length === LETTERS_LENGTH && !isValidWord(currentWord)) {
+      return console.log('is invalid word')
     }
 
     setCompleteWords([...completeWords, currentWord])
@@ -53,7 +58,7 @@ const WordleGame = () => {
 
     if (event.key === 'Backspace' && currentWord.length > 0) return handleDelete()
 
-    if (event.key === 'Enter' && currentWord.length === LETTERS_LENGTH && turn <= ROW_LENGTH) {
+    if (event.key === 'Enter' && currentWord.length === LETTERS_LENGTH && turn <= MAX_CHALLENGES) {
       return handleEnter()
     }
 
@@ -66,7 +71,7 @@ const WordleGame = () => {
 
   useEffect(() => setWordOfTheDay('BREAK'), [])
 
-  console.log({ as: Array.from(Array(ROW_LENGTH - turn)) })
+  console.log({ as: Array.from(Array(MAX_CHALLENGES - turn)) })
 
   return (
     <section>
@@ -76,7 +81,7 @@ const WordleGame = () => {
 
       {gameStatus === 'playing' ? <CurrentRow guess={currentWord} /> : null}
 
-      {Array.from(Array(ROW_LENGTH - turn)).map((_, index) => (
+      {Array.from(Array(MAX_CHALLENGES - turn)).map((_, index) => (
         <EmptyRow key={index} />
       ))}
     </section>

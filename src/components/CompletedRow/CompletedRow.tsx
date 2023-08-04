@@ -12,7 +12,7 @@ interface CompletedRowProps {
  */
 const CompletedRow = ({ guess, solution }: CompletedRowProps) => {
   return (
-    <div className="mb-4 flex gap-4 uppercase">
+    <div className="mb-3 flex gap-3 uppercase">
       {Array.from(Array(LETTERS_LENGTH)).map((_, index) => (
         <CharacterBox
           key={index}
