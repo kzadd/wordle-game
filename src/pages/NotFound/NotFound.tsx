@@ -1,8 +1,10 @@
+import NotFoundContainer from '@/containers/NotFound'
+
 /**
- * The not found page
+ * The NotFound' page
  */
 const NotFound = () => {
-  return <div className="flex h-screen items-center justify-center text-xl font-bold">404</div>
+  return <NotFoundContainer />
 }
 
 export default NotFound

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
 /**
- * The home page
+ * The WordleGame' container
  */
-const Home = () => {
+const WordleGame = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
     const theme = localStorage.getItem('theme')
@@ -23,7 +23,8 @@ const Home = () => {
   }
 
   return (
-    <div className="flex h-screen items-center justify-center bg-white text-lg font-bold text-white dark:bg-gray-400">
+    <div>
+      WordleGame
       <button
         className="rounded-3xl bg-gray-400 p-4 dark:bg-white dark:text-gray-400"
         onClick={handleToggleTheme}
@@ -34,4 +35,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default WordleGame
