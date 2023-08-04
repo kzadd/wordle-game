@@ -1,16 +1,107 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import {
+  DICTIONARY_WORDS,
+  HOW_TO_PLAY_DIALOG_MS,
+  LETTERS_LENGTH,
+  MAX_CHALLENGES,
+  REVEAL_TIME_MS
+} from '@/configs/constants'
+import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage } from '@/utils/localStorage'
+import { getWordOfDay, isValidWord } from '@/utils/words'
+import { GameStatus } from '@/types/wordle'
 import HowToPlayDialogContainer from '@/containers/HowToPlayDialog'
 import KeyboardContainer from '@/containers/Keyboard'
 import NavbarContainer from '@/containers/Navbar'
 import StatsDialogContainer from '@/containers/StatsDialog'
 import WordleGameContainer from '@/containers/WordleGame'
+import { useWindow } from '@/hooks/useWindow'
 
 /**
  * The Game' page
  */
 const Game = () => {
+  const [completeWords, setCompleteWords] = useState<string[]>([])
+  const [currentWord, setCurrentWord] = useState<string>('')
+  const [gameStatus, setGameStatus] = useState<GameStatus>('playing')
   const [isHowToPlayDialogOpen, setIsHowToPlayDialogOpen] = useState(false)
+  const [isRevealing, setIsRevealing] = useState<boolean>(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
+  const [turn, setTurn] = useState<number>(1)
+  const [word, setGuessWord] = useState<string>('')
+
+  const handleChar = (letter: string) => {
+    const newWord = currentWord + letter
+    setCurrentWord(newWord)
+  }
+
+  const handleDelete = () => {
+    const newWord = currentWord.slice(0, -1)
+    setCurrentWord(newWord)
+  }
+
+  const handleEnter = () => {
+    if (currentWord === word) {
+      setCompleteWords([...completeWords, currentWord])
+
+      return setGameStatus('won')
+    }
+
+    if (turn === MAX_CHALLENGES) {
+      setCompleteWords([...completeWords, currentWord])
+
+      return setGameStatus('lost')
+    }
+
+    if (currentWord.length === LETTERS_LENGTH && !isValidWord(currentWord)) {
+      return alert('is invalid word')
+    }
+
+    setIsRevealing(true)
+    // turn this back off after all
+    // chars have been revealed
+    setTimeout(() => {
+      setIsRevealing(false)
+    }, REVEAL_TIME_MS * LETTERS_LENGTH)
+
+    setCompleteWords([...completeWords, currentWord])
+    setTurn(turn + 1)
+    setCurrentWord('')
+  }
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    const letter = event.key.toUpperCase()
+
+    if (gameStatus !== 'playing') return
+
+    if (event.key === 'Backspace' && currentWord.length > 0) return handleDelete()
+
+    if (event.key === 'Enter' && currentWord.length === LETTERS_LENGTH && turn <= MAX_CHALLENGES) {
+      return handleEnter()
+    }
+
+    if (currentWord.length >= LETTERS_LENGTH) return
+
+    if (DICTIONARY_WORDS.includes(letter)) return handleChar(letter)
+  }
+
+  useWindow('keydown', handleKeyDown)
+
+  useEffect(() => {
+    if (!loadGameStateFromLocalStorage()) {
+      setTimeout(() => {
+        setIsHowToPlayDialogOpen(true)
+      }, HOW_TO_PLAY_DIALOG_MS)
+    }
+  })
+
+  // Initial get word for 5 min
+  useEffect(() => {
+    setGuessWord(getWordOfDay())
+  }, [])
+
+  useEffect(() => {
+    saveGameStateToLocalStorage({ completeWords, solution: word })
+  }, [completeWords, word])
 
   return (
     <main className="h-screen">
@@ -19,7 +110,14 @@ const Game = () => {
           setIsHowToPlayDialogOpen={setIsHowToPlayDialogOpen}
           setIsStatsModalOpen={setIsStatsModalOpen}
         />
-        <WordleGameContainer />
+        <WordleGameContainer
+          completeWords={completeWords}
+          currentWord={currentWord}
+          gameStatus={gameStatus}
+          isRevealing={isRevealing}
+          turn={turn}
+          word={word}
+        />
         <KeyboardContainer />
         <HowToPlayDialogContainer
           isOpen={isHowToPlayDialogOpen}

@@ -62,7 +62,7 @@ const HowToPlayDialog = ({ isOpen, onClose }: HowToPlayDialogProps) => {
               </p>
 
               <div className="my-2 flex justify-center gap-2 p-2">
-                <CharacterBox letter="G" status="correct" />
+                <CharacterBox isCompleted isRevealing letter="G" status="correct" />
                 <CharacterBox letter="A" status="edit" />
                 <CharacterBox letter="T" status="edit" />
                 <CharacterBox letter="O" status="edit" />
@@ -77,7 +77,7 @@ const HowToPlayDialog = ({ isOpen, onClose }: HowToPlayDialogProps) => {
               <div className="my-2 flex justify-center gap-2 p-2">
                 <CharacterBox letter="V" status="edit" />
                 <CharacterBox letter="O" status="edit" />
-                <CharacterBox letter="C" status="present" />
+                <CharacterBox isCompleted isRevealing letter="C" status="present" />
                 <CharacterBox letter="A" status="edit" />
                 <CharacterBox letter="L" status="edit" />
               </div>
@@ -92,7 +92,7 @@ const HowToPlayDialog = ({ isOpen, onClose }: HowToPlayDialogProps) => {
                 <CharacterBox letter="A" status="edit" />
                 <CharacterBox letter="G" status="edit" />
                 <CharacterBox letter="U" status="edit" />
-                <CharacterBox letter="E" status="absent" />
+                <CharacterBox isCompleted isRevealing letter="E" status="absent" />
               </div>
 
               <p className="mb-5 text-left text-[#202537] dark:text-[#DADCE0]">
@@ -108,7 +108,7 @@ const HowToPlayDialog = ({ isOpen, onClose }: HowToPlayDialogProps) => {
               </p>
 
               <button
-                className="h-[50px] w-[250px] rounded bg-[#6AAA64] text-2xl font-bold text-[#DADCE0] hover:bg-[#5a9454] focus:outline-none"
+                className="h-[50px] w-[250px] rounded-md bg-[#6AAA64] text-2xl font-bold text-white hover:bg-[#5a9454] focus:outline-none"
                 onClick={() => onClose()}
               >
                 !JUGAR¡

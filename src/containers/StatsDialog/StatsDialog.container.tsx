@@ -44,7 +44,7 @@ const StatsDialog = ({ isOpen, onClose }: StatsDialogProps) => {
               </Dialog.Title>
 
               <button
-                className="h-[50px] w-[250px] rounded bg-[#6AAA64] text-2xl font-bold text-[#DADCE0] hover:bg-[#5a9454] focus:outline-none"
+                className="h-[50px] w-[250px] rounded bg-[#6AAA64] text-2xl font-bold text-white hover:bg-[#5a9454] focus:outline-none"
                 onClick={() => onClose()}
               >
                 Aceptar
