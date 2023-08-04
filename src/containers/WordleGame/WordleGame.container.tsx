@@ -71,10 +71,8 @@ const WordleGame = () => {
 
   useEffect(() => setWordOfTheDay('BREAK'), [])
 
-  console.log({ as: Array.from(Array(MAX_CHALLENGES - turn)) })
-
   return (
-    <section>
+    <section className="mb-14">
       {completeWords.map((guess, index) => (
         <CompletedRow guess={guess} key={index} solution={wordOfTheDay} />
       ))}

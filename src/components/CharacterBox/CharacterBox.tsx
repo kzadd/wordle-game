@@ -11,9 +11,9 @@ interface CharacterBoxProps {
  */
 const CharacterBox = ({ letter = '', status = 'empty' }: CharacterBoxProps) => {
   const classes = classNames({
-    'bg-[#66A060]': status === 'correct',
+    'bg-[#66A060] dark:bg-[#6AAA64]': status === 'correct',
     'bg-[#939B9F]': status === 'absent',
-    'bg-[#939B9F4D]': status === 'empty',
+    'bg-[#939B9F4D] dark:bg-[#939B9F33]': status === 'empty',
     'bg-[#CEB02C]': status === 'present',
     'bg-white border-black border-2 text-black': status === 'edit'
   })
