@@ -88,11 +88,11 @@ const HowToPlayDialog = ({ isOpen, onClose }: HowToPlayDialogProps) => {
               </p>
 
               <div className="my-2 flex justify-center gap-2 p-2">
-                <CharacterBox letter="V" status="edit" />
+                <CharacterBox letter="C" status="edit" />
                 <CharacterBox letter="A" status="edit" />
-                <CharacterBox letter="G" status="edit" />
-                <CharacterBox letter="U" status="edit" />
-                <CharacterBox isCompleted isRevealing letter="E" status="absent" />
+                <CharacterBox letter="N" status="edit" />
+                <CharacterBox letter="T" status="edit" />
+                <CharacterBox isCompleted isRevealing letter="O" status="absent" />
               </div>
 
               <p className="mb-5 text-left text-[#202537] dark:text-[#DADCE0]">
